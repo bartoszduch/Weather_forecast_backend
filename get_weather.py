@@ -17,12 +17,15 @@ def get_weather_data(lati, longi):
         weather_data = []
 
         for i in range(len(data["daily"]["time"])):
+            sunshine_duration=data["daily"]["sunshine_duration"][i]
+            energy=2.5*0.2*sunshine_duration
             weather_data.append({
                 'date': data["daily"]["time"][i],
                 'weather_code': data["daily"]["weather_code"][i],
                 'temperature_min': data["daily"]["temperature_2m_min"][i],
                 'temperature_max': data["daily"]["temperature_2m_max"][i],
                 'sunshine_duration': data["daily"]["sunshine_duration"][i],#I'm not sure if I chose the sunlight time parameter correctly
+                'energy': energy,
             })
 
         return weather_data
@@ -31,15 +34,4 @@ def get_weather_data(lati, longi):
         # Obsługa błędów zapytania do API
         return {'error': str(e)}
 
-
-def count_energy(resp):
-    if resp == {'error': "Invalid latitude or longitude values. Latitude must be between -90 and 90. Longitude must be between -180 and 180."}:
-        return {'error': "Weather data was not downloaded correctly"}
-
-    energy_data=[]
-    for i in range(len(resp)):
-        sunshine_duration = resp[i].get('sunshine_duration')
-        energy=2.5*0.2*sunshine_duration
-        energy_data.append(energy)
-    return energy_data
 

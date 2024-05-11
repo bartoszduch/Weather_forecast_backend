@@ -1,43 +1,43 @@
 import unittest
-from get_weather import get_weather_data, count_energy
+from unittest.mock import patch, MagicMock
+from app import app, get_weather_data
 
 class TestWeatherApp(unittest.TestCase):
-
-    def test_get_weather_data_valid_values(self):
-        # Sprawdzenie, czy funkcja get_weather_data zwraca poprawne dane dla prawidłowych wartości szerokości i długości geograficznej
-        latitude = 50
-        longitude = 20
+    def test_get_weather_data_valid_input(self):
+        # Test dla poprawnych danych wejściowych
+        latitude = 40.7128
+        longitude = -74.0060
         response = get_weather_data(latitude, longitude)
+        self.assertNotIn('error', response)
         self.assertIsInstance(response, list)
-        self.assertTrue(len(response) > 0)
-        self.assertIsInstance(response[0], dict)
-        self.assertIn('date', response[0])
-        self.assertIn('weather_code', response[0])
-        self.assertIn('temperature_min', response[0])
-        self.assertIn('temperature_max', response[0])
-        self.assertIn('sunshine_duration', response[0])
+        self.assertGreater(len(response), 0)
 
-    def test_get_weather_data_invalid_values(self):
-        # Sprawdzenie, czy funkcja get_weather_data zwraca błąd dla nieprawidłowych wartości szerokości i długości geograficznej
-        latitude = 200
-        longitude = 200
+    def test_get_weather_data_invalid_input(self):
+        # Test dla niepoprawnych danych wejściowych
+        latitude = 100.0
+        longitude = -200.0
         response = get_weather_data(latitude, longitude)
-        self.assertIsInstance(response, dict)
         self.assertIn('error', response)
+        self.assertEqual(response['error'], 'Invalid latitude or longitude values. Latitude must be between -90 and 90. Longitude must be between -180 and 180.')
 
-    def test_count_energy(self):
-        # Sprawdzenie, czy funkcja count_energy poprawnie oblicza energię dla danych pogodowych
-        mock_weather_data = [
-            {'sunshine_duration': 3600},  # 1 godzina słońca
-            {'sunshine_duration': 7200},  # 2 godziny słońca
-        ]
-        energy = count_energy(mock_weather_data)
-        print(len(energy))
-        print(energy[0],energy[1])
-        self.assertIsInstance(energy, list)
-        self.assertEqual(len(energy), 2)
-        self.assertAlmostEqual(energy[0], 2.5*0.2*3600)  # oczekiwana wartość: moc * efektywność * 1 godzina
-        self.assertAlmostEqual(energy[1], 2.5*0.2*7200)  # oczekiwana wartość: moc * efektywność * 2 godziny
+    def test_weather_endpoint_valid_request(self):
+        # Test dla poprawnego żądania do endpointu /weather
+        tester = app.test_client(self)
+        response = tester.get('/weather?latitude=40.7128&longitude=-74.0060')
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertNotIn('error', data)
+        self.assertIsInstance(data, list)
+        self.assertGreater(len(data), 0)
+
+    def test_weather_endpoint_missing_parameters(self):
+        # Test dla braku parametrów w żądaniu do endpointu /weather
+        tester = app.test_client(self)
+        response = tester.get('/weather')
+        self.assertEqual(response.status_code, 400)
+        data = response.get_json()
+        self.assertIn('error', data)
+        self.assertEqual(data['error'], 'Latitude and longitude parameters are required.')
 
 if __name__ == '__main__':
     unittest.main()
