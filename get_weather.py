@@ -17,10 +17,16 @@ def get_weather_data(lati, longi):
         weather_data = []
 
         for i in range(len(data["daily"]["time"])):
+            date_str = data["daily"]["time"][i]
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+            prepared_date = date_obj.strftime('%d/%m/%Y')
+
+
             sunshine_duration=data["daily"]["sunshine_duration"][i]
             energy=2.5*0.2*sunshine_duration
+
             weather_data.append({
-                'date': data["daily"]["time"][i],
+                'date': prepared_date,
                 'weather_code': data["daily"]["weather_code"][i],
                 'temperature_min': data["daily"]["temperature_2m_min"][i],
                 'temperature_max': data["daily"]["temperature_2m_max"][i],
