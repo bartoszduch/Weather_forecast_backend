@@ -7,46 +7,46 @@
 </head>
 <body>
     <h1>Backend Application README</h1>
-    <p>This document serves as a guide for using and understanding the backend part of our solar energy calculation application.</p>
+    <p>This document serves as a comprehensive guide for utilizing and understanding the backend of our solar energy calculation application.</p>
 
     <h2>Overview</h2>
-    <p>This backend application is designed to fetch and compute solar energy data over a 7-day period. It utilizes an external API to retrieve the necessary data based on coordinates supplied from the frontend. The data is then processed to calculate the potential energy generated from sunlight exposure.</p>
+    <p>The backend application is engineered to fetch and compute solar energy data for a 7-day forecast period. It interacts with an external API to obtain relevant data based on geographical coordinates received from the frontend. This data is then processed to estimate the potential energy that can be generated from solar exposure.</p>
 
-    <h2>Features</h2>
+    <h2>Key Features</h2>
     <ul>
-        <li><strong>Data Retrieval:</strong> Uses an external API to gather solar data based on specific geographical coordinates.</li>
-        <li><strong>Energy Calculation:</strong> Computes the amount of energy that can be harvested from solar exposure over a seven-day period.</li>
-        <li><strong>Coordinate Validation:</strong> Validates the coordinates provided to ensure they fall within acceptable limits.</li>
-        <li><strong>JSON Endpoint:</strong> Returns the processed data in JSON format through a designated endpoint.</li>
-        <li><strong>Unit Testing:</strong> Includes several unit tests to verify the functionality and accuracy of the application.</li>
+        <li><strong>Data Retrieval:</strong> Fetches solar data using an external API, based on geographical coordinates.</li>
+        <li><strong>Energy Calculation:</strong> Calculates the energy that can be harvested from solar exposure, providing daily estimates over a seven-day period.</li>
+        <li><strong>Coordinate Validation:</strong> Ensures the coordinates provided are within acceptable geographical boundaries.</li>
+        <li><strong>JSON Endpoint:</strong> Outputs the processed data in JSON format accessible through a RESTful API endpoint.</li>
+        <li><strong>Unit Testing:</strong> Features comprehensive unit tests to ensure the reliability and accuracy of the application.</li>
     </ul>
 
     <h2>API Usage</h2>
     <h3>Endpoints</h3>
-    <p>The main endpoint of the application is described below:</p>
+    <p>The main endpoint of the application is:</p>
     <ul>
-        <li><strong>GET /solar-data</strong> - Accepts geographical coordinates as input and returns the calculated solar energy data in JSON format.</li>
+        <li><strong>GET /solar-data</strong> - Receives geographical coordinates as query parameters and returns the solar energy data in JSON format.</li>
     </ul>
     
     <h2>Example Request</h2>
-    <p>Here is an example of how to request data from the backend:</p>
-    <code>
+    <p>To request data from the backend, use the following curl command:</p>
+    <pre>
         curl -X GET "http://yourbackendurl.com/solar-data?lat=52.5200&lon=13.4050"
-    </code>
+    </pre>
 
     <h2>Unit Tests</h2>
-    <p>The backend includes unit tests to ensure that each component functions correctly. These tests can be run using a standard Python testing framework like pytest.</p>
+    <p>The backend includes unit tests for validating the functionality of each component. These tests are executed using a Python testing framework, such as pytest.</p>
 
     <h2>Getting Started</h2>
-    <p>To get started with this backend, you need to:</p>
+    <p>Follow these steps to set up the backend:</p>
     <ol>
         <li>Clone the repository.</li>
-        <li>Install the necessary dependencies.</li>
-        <li>Set up your environment variables.</li>
-        <li>Run the application using a command like <code>python app.py</code>.</li>
+        <li>Install the necessary dependencies as listed below.</li>
+        <li>Configure your environment variables appropriately.</li>
+        <li>Run the application using the command <code>python app.py</code>.</li>
     </ol>
 
     <h2>Dependencies</h2>
-    <p>List all project dependencies here, such as external libraries or APIs.</p>
+    <p>Ensure all necessary project dependencies are listed below. Include libraries, frameworks, and any APIs the project relies on.</p>
 </body>
 </html>
