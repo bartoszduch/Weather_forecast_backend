@@ -21,7 +21,7 @@ class TestWeatherApp(unittest.TestCase):
         self.assertEqual(response['error'], 'Invalid latitude or longitude values. Latitude must be between -90 and 90. Longitude must be between -180 and 180.')
 
     def test_weather_endpoint_valid_request(self):
-        # Test dla poprawnego żądania do endpointu /weather
+        # Test dla poprawnego żądania do endpointu
         tester = app.test_client(self)
         response = tester.get('/weather?latitude=40.7128&longitude=-74.0060')
         self.assertEqual(response.status_code, 200)
@@ -31,7 +31,7 @@ class TestWeatherApp(unittest.TestCase):
         self.assertGreater(len(data), 0)
 
     def test_weather_endpoint_missing_parameters(self):
-        # Test dla braku parametrów w żądaniu do endpointu /weather
+        # Test dla braku parametrów w żądaniu do endpointu
         tester = app.test_client(self)
         response = tester.get('/weather')
         self.assertEqual(response.status_code, 400)
