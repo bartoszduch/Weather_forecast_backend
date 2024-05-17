@@ -23,6 +23,10 @@
     <ul>
         <li><strong>GET /solar-data</strong> - Receives geographical coordinates as query parameters and returns the solar energy data in JSON format.</li>
     </ul>
+        <h2>Example Request</h2>
+    <p>To request data from the backend, use the following curl command:</p>
+    <pre>
+        curl -X GET "http://yourbackendurl.com/solar-data?lat=52.5200&lon=13.4050"
     </pre>
     <h2>Unit Tests</h2>
     <p>The backend includes unit tests for validating the functionality of each component. These tests are executed using a Python testing framework, such as pytest.</p>
