@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>Weather Forecast Application for Codibly - BACKEND</h1>
+    <h1>Weather Forecast Application - BACKEND</h1>
     <p>This document serves as a comprehensive guide for utilizing and understanding the backend of our application.</p>
     <h2>Overview</h2>
     <p>The backend application is engineered to fetch and compute solar energy data for a 7-day forecast period. It interacts with an external API to obtain relevant data based on geographical coordinates received from the frontend. This data is then processed to estimate the potential energy that can be generated from solar exposure.</p>
